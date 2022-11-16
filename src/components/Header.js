@@ -3,6 +3,7 @@ import { Container } from '@mui/system'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
+import { CryptoState } from '../CryptoContext';
 
 const Header = () => {
   const useStyles = makeStyles()(() => ({
@@ -23,6 +24,7 @@ const Header = () => {
 
   const { classes } = useStyles();
   const navigate = useNavigate()
+  const { currency, setCurrency } = CryptoState();
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -35,11 +37,14 @@ const Header = () => {
                 width: 100,
                 height: 40,
                 marginLeft: 15,
-                color: "white"
+                color: "white",
               }
-            }>
-              <MenuItem value={'ksh'}>Ksh</MenuItem>
-              <MenuItem value={'tsh'}>Tsh</MenuItem>
+            }
+            value={ currency }
+            onChange={(e) => setCurrency(e.target.value)}
+            >
+              <MenuItem value={'ksh'}>ksh</MenuItem>
+              <MenuItem value={'tsh'}>tsh</MenuItem>
             </Select>
           </Toolbar>
         </Container>

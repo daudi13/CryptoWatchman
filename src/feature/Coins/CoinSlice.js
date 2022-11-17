@@ -1,8 +1,8 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import { TrendingCoins } from "../../config/api";
 
-const url = TrendingCoins(currency);
+const url = TrendingCoins('ksh');
 
 const initialState = {
   coinsItems: [],
@@ -14,7 +14,7 @@ export const getCoinsItems = createAsyncThunk(
   async () => {
     try {
       const resp = await axios(url);
-      return resp;
+      return resp.data;
     } catch (error) {
       console.log(error)
     }
@@ -28,7 +28,7 @@ const coinSlice = createSlice({
     [getCoinsItems.pending]: (state) => {
       state.isLoading = true;
     },
-    [getCoinsItems.fulfilled]: (state) => {
+    [getCoinsItems.fulfilled]: (state, action) => {
       state.isLoading = false;
       state.coinsItems = action.payload;
     },

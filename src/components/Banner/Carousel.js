@@ -14,6 +14,10 @@ const useStyles = makeStyles()((theme) => ({
   }
 }))
 
+export function numberWithCommas(x) {
+  return x.string().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+}
+
 const Carousel = () => {
   const [trending, setTrending] = useState([]);
   const { currency } = CryptoState(); 
@@ -59,7 +63,7 @@ const Carousel = () => {
           </span>
         </span>
         <span style={{ fontSize: 22, fontWeight: 500 }}>
-          {coin?.symbol}{coin?.current_price.toFixed(2)}
+          {coin?.symbol}{numberWithCommas(coin?.current_price.toFixed(2))}
         </span>
       </Link>
     )

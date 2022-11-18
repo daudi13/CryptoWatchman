@@ -6,8 +6,6 @@ import { TrendingCoins } from '../../config/api'
 import AliceCarousel from 'react-alice-carousel'
 import { Link } from 'react-router-dom'
 
-const handleDragStart = (e) => e.preventDefault();
-
 const useStyles = makeStyles()((theme) => ({
   carousel: {
     height: "50%",

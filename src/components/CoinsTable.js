@@ -5,6 +5,7 @@ import { CryptoState } from '../CryptoContext';
 import axios from 'axios';
 import { makeStyles } from 'tss-react/mui';
 import { ThemeProvider, createTheme, Container, Typography, TextField, TableContainer, LinearProgress, Table, TableHead, TableRow, TableCell } from '@mui/material';
+import Pagination from '@mui/material/Pagination';
 import { numberWithCommas } from './Banner/Carousel';
 
 function CoinsTable() {
@@ -47,6 +48,11 @@ function CoinsTable() {
         backgroundColor: "#131111",
       },
       fontFamily: "Montserrat"
+    },
+    pagination: {
+      "& .MuiPaginationItem-root": {
+        color: "gold",
+      }
     }
   }))
 
@@ -167,6 +173,24 @@ function CoinsTable() {
             )
           }
         </TableContainer>
+        {
+          coins.length &&
+          <Pagination
+          count={((handleSearch()?.length)/10).toFixed(2)}
+          variant="outlined"
+          style={{
+            padding: 20,
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            marginTop: 20,
+          }}
+            classes={{ ul: classes.pagination }}
+            onChange={(_, value) => {
+              setPage(value);
+              window.scroll(0, 450)
+            }}
+        />}
       </Container>
     </ThemeProvider>
   )

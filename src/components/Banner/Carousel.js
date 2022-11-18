@@ -11,11 +11,19 @@ const useStyles = makeStyles()((theme) => ({
     height: "50%",
     display: "flex",
     alignItems: "center",
+  },
+  carouselItem: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center",
+    cursor: "pointer",
+    textTransform: "uppercase",
+    color: "white",
   }
 }))
 
 export function numberWithCommas(x) {
-  return x.string().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+  return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",")
 }
 
 const Carousel = () => {

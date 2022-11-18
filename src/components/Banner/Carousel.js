@@ -83,6 +83,7 @@ const Carousel = () => {
     <div className={classes.carousel}>
       <AliceCarousel
         mouseTracking
+        autoPlay
         infinite
         autoPlayInterval={1000}
         animationDuration={1500}

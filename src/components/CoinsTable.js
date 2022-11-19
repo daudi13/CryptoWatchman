@@ -103,8 +103,9 @@ function CoinsTable() {
 
                       return (
                         <TableRow
-                          onClick={() => navigate(`/coins/${row.id}`)}
+                          onClick={() => navigate(`/coin/${row.id}`)}
                           className={classes.row}
+                          key={row.id}
                         >
                           <TableCell component='th' scope='row' style={
                             {
@@ -176,7 +177,7 @@ function CoinsTable() {
         {
           coins.length &&
           <Pagination
-          count={((handleSearch()?.length)/10).toFixed(2)}
+          count={(+(handleSearch()?.length)/10).toFixed(2) || 0}
           variant="outlined"
           style={{
             padding: 20,

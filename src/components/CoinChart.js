@@ -2,6 +2,10 @@ import axios from 'axios';
 import React, {useEffect, useState} from 'react'
 import { CryptoState } from '../CryptoContext';
 import { HistoricalChart } from '../config/api';
+import { createTheme, ThemeProvider } from '@mui/system';
+import { makeStyles } from 'tss-react/mui';
+import { Line } from 'react-chartjs-2';
+
 
 const CoinChart = ({coin}) => {
   const [historicalData, setHistoricalData] = useState();
@@ -20,8 +24,44 @@ const CoinChart = ({coin}) => {
     fetchHistoricalData();
   }, [currency, days])
 
+  const darkTheme = createTheme({
+    palette: {
+      mode: 'dark'
+    }
+  });
+
+  const useStyles = makeStyles()((theme) => ({
+    container: {
+      width: "75%",
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      justifyContent: "center",
+      marginTop: 25,
+      padding: 40,
+      [theme.breakpoints.down("md")]: {
+        width: "100%",
+        marginTop: 0,
+        padding: 20,
+        paddingTop: 0,
+      }
+    },
+  }))
+
+  const { classes } = useStyles();
+
   return (
-    <div></div>
+    <ThemeProvider theme={darkTheme}>
+      <div className={classes.container}>
+        {
+          !historicalData ? ("Loading...") : (
+            <>?</>)
+        }
+        <div className={classes.buttons}>
+          
+        </div>
+      </div>
+    </ThemeProvider>
   )
 }
 

@@ -5,6 +5,7 @@ import { HistoricalChart } from '../config/api';
 import { createTheme, ThemeProvider } from '@mui/system';
 import { makeStyles } from 'tss-react/mui';
 import { Line } from 'react-chartjs-2';
+import DayButtons from './DayButtons';
 import {
   Chart as ChartJS,
   CategoryScale,

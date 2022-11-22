@@ -69,8 +69,30 @@ const CoinChart = ({coin}) => {
         paddingTop: 0,
       }
     },
+    buttons: {
+      display: "flex",
+      gap: 10,
+      marginTop: 20,
+      justifyContent: "space-around",
+      width: "70%",
+      [theme.breakpoints.down("md")]: {
+        width: "100%"
+      }
+    },
+    // btn: {
+    //   border: "1px solid gold",
+    //   borderRadius: 5,
+    //   padding: 10,
+    //   paddingLeft: 20,
+    //   paddingRight: 20,
+    //   fontFamily: "Montserrat",
+    //   cursor: "pointer",
+    //   backgroundColor: selected ? "gold" : "",
+    //   color: selected ? "black" : "",
+    //   fontWeight: selected ? 700 : 500
+    // }
   }))
-  
+
   const { classes } = useStyles();
 
   return (

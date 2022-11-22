@@ -68,7 +68,7 @@ const CoinChart = ({coin}) => {
       }
     },
   }))
-
+  
   const { classes } = useStyles();
 
   return (

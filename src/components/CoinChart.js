@@ -16,6 +16,7 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js';
+import { chartDays } from '../config/ChartDays';
 
 ChartJS.register(
   CategoryScale,

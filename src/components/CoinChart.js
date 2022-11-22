@@ -55,7 +55,14 @@ const CoinChart = ({coin}) => {
       <div className={classes.container}>
         {
           !historicalData ? ("Loading...") : (
-            <>?</>)
+            <Line
+              data={{
+                labels: historicalData.map((coin) => {
+                  let date = new Date(coin[0]);
+                  let time = date.getHours() > 12 ? `${date.getMinutes() - 12}: ${date.getMinutes()} PM` : `${date.getHours()}: ${date.getMinutes()} AM`
+                })
+              }}
+            />)
         }
         <div className={classes.buttons}>
           

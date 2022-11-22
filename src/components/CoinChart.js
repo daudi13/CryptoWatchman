@@ -120,7 +120,17 @@ const CoinChart = ({coin}) => {
             />)
         }
         <div className={classes.buttons}>
-          
+          {
+            chartDays.map((btn) => {
+              return (
+                <DayButtons
+                  selected={btn.value === days}
+                  onClick={() => setDays(btn.value)}
+                  key={btn.value}
+                  btn={btn}
+                />)
+            })
+          }
         </div>
       </div>
     </ThemeProvider>

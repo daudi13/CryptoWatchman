@@ -11,7 +11,9 @@ import { CryptoState } from '../CryptoContext';
 
 const Coin = () => {
   const { id } = useParams();
-  const {currency, symbol, coin, setCoin, setLoading, loading} = CryptoState();
+  const [coin, setCoin] = useState();
+  const [loading, setLoading] = useState(true);
+  const {currency, symbol} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
@@ -88,7 +90,7 @@ const Coin = () => {
     <div className={classes.container}>
       <Helmet>
         <meta charSet='utf-8' />
-        <title>CryptoWatchMan | {id}</title>
+        <title>🪙CryptoWatchMan | {id}</title>
       </Helmet>
     <div className={classes.sidebar}>
       <img

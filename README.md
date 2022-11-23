@@ -1,6 +1,6 @@
 # CryptoWatchman
 
-CryotoWatchman that watches and displays the perfomance of the top competitive crypocurrency.
+CryotoWatchman is a platform that watches and displays the perfomance of the top competitive crypocurrency.
 
 ![](./cryptoWatchman.gif)
 

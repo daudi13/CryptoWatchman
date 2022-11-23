@@ -11,9 +11,7 @@ import { CryptoState } from '../CryptoContext';
 
 const Coin = () => {
   const { id } = useParams();
-  const [coin, setCoin] = useState();
-  const [loading, setLoading] = useState(true);
-  const {currency, symbol} = CryptoState();
+  const {currency, symbol, coin, setCoin, setLoading, loading} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));

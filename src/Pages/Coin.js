@@ -2,6 +2,7 @@ import { Typography, CircularProgress, LinearProgress } from '@mui/material';
 import axios from 'axios';
 import parse from 'html-react-parser';
 import React, { useEffect, useState } from 'react'
+import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui';
 import CoinChart from '../components/CoinChart';
@@ -86,36 +87,40 @@ const Coin = () => {
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }}/>
 
   return (
-        <div className={classes.container}>
-      <div className={classes.sidebar}>
-        <img
-          src={coin?.image.large}
-          alt={coin?.name}
-          height="200"
-          style={{marginBottom: 20}}
-        />
-        <Typography
-          variant='h3'
-          className={classes.heading}
-        >
-          {coin?.name}
-        </Typography>
-        <Typography
-          variant='subtitle1'
-          className={classes.description}
-        >
-          { parse(`${coin?.description.en}`)}
-        </Typography>
-        <div className={classes.info}>
-          <Typography variant="h5" style={{marginBottom: "7px", AlignItems: "start"}} className={classes.heading}>Rank: <span className={classes.fig}>{coin?.coingecko_rank}</span></Typography>
-          <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Current Price:<span className={classes.fig}> {symbol}
-          {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
-          </span></Typography>
-          <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
-        </div>
+    <div className={classes.container}>
+      <Helmet>
+        <meta charSet='utf-8' />
+        <title>CryptoWatchMan | {id}</title>
+      </Helmet>
+    <div className={classes.sidebar}>
+      <img
+        src={coin?.image.large}
+        alt={coin?.name}
+        height="200"
+        style={{marginBottom: 20}}
+      />
+      <Typography
+        variant='h3'
+        className={classes.heading}
+      >
+        {coin?.name}
+      </Typography>
+      <Typography
+        variant='subtitle1'
+        className={classes.description}
+      >
+        { parse(`${coin?.description.en}`)}
+      </Typography>
+      <div className={classes.info}>
+        <Typography variant="h5" style={{marginBottom: "7px", AlignItems: "start"}} className={classes.heading}>Rank: <span className={classes.fig}>{coin?.coingecko_rank}</span></Typography>
+        <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Current Price:<span className={classes.fig}> {symbol}
+        {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
+        </span></Typography>
+        <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
       </div>
-      <CoinChart coin={coin} />
-        </div>
+    </div>
+    <CoinChart coin={coin} />
+  </div>
   )
 }
 

@@ -8,7 +8,7 @@ const Homepage = () => {
     <>
       <Helmet>
         <meta charSet='utf-8'/>
-        <title>CryptoWatchMan | Welcome</title>
+        <title>🪙 CryptoWatchMan | Welcome</title>
       </Helmet>
       <Banner />
       <CoinsTable/>

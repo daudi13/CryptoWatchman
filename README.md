@@ -1,6 +1,6 @@
 # CryptoWatchman
 
-CryotoWatchman is a platform that watches and displays the perfomance of the top competitive crypocurrency.
+CryotoWatchman is a platform that watches and displays the perfomance of the top competitive crypocurrency using Geckcoin API
 
 ![](./cryptoWatchman.gif)
 

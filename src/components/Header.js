@@ -3,21 +3,9 @@ import { Container } from '@mui/system'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
-import Box from '@mui/material/Box';
 import { CryptoState } from '../CryptoContext';
+import ModalBox from './ModalBox';
 
-const style = {
-  position: 'absolute',
-  top: '50%',
-  left: '50%',
-  transform: 'translate(-50%, -50%)',
-  width: 400,
-  bgcolor: 'background.paper',
-  border: '2px solid #000',
-  boxShadow: 24,
-  color: "#fff",
-  p: 4,
-};
 
 const Header = () => {
   const useStyles = makeStyles()(() => ({
@@ -43,9 +31,8 @@ const Header = () => {
 
   const { classes } = useStyles();
   const navigate = useNavigate()
-  const { currency, setCurrency, open, setOpen } = CryptoState();
+  const { currency, setCurrency, setOpen, open } = CryptoState();
   const handleOpen = () => setOpen(true);
-  const handleClose = () => setOpen(false);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -79,6 +66,7 @@ const Header = () => {
           </Toolbar>
         </Container>
       </AppBar>
+      <ModalBox open={open} setOpen={setOpen} />
     </ThemeProvider>
   )
 }

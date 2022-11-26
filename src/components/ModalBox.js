@@ -1,7 +1,25 @@
 import React from 'react';
+import { Typography } from '@mui/material'
 import Modal from '@mui/material/Modal';
+import Box from '@mui/material/Box';
+import { CryptoState } from '../CryptoContext';
 
-function Modal() {
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 400,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  color: "#fff",
+  p: 4,
+};
+
+function ModalBox({open, setOpen}) {
+  const handleClose = () => setOpen(false);
+
   return (
   <Modal
       open={open}
@@ -17,8 +35,8 @@ function Modal() {
           Duis mollis, est non commodo luctus, nisi erat porttitor ligula.
         </Typography>
       </Box>
-    </Modal>
+  </Modal>
   )
 }
 
-export default Modal
+export default ModalBox

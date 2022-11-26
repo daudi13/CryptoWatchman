@@ -57,7 +57,12 @@ const Header = () => {
               </Select>
               <Button
                 variant='contained'
-                style={{ backgroundColor: "gold" }}
+                style={{
+                  width: 85,
+                  height: 40,
+                  marginLeft: 15,
+                  backgroundColor: "#EEBC1D",
+                }}
                 onClick={handleOpen}
               >
                 Login

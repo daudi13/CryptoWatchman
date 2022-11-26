@@ -1,6 +1,5 @@
 import { AppBar, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider, Button } from '@mui/material'
 import { Container } from '@mui/system'
-import Modal from '@mui/material/Modal';
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';

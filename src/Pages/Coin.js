@@ -1,7 +1,7 @@
-import { Typography, CircularProgress, LinearProgress } from '@mui/material';
+import { Typography, LinearProgress } from '@mui/material';
 import axios from 'axios';
 import parse from 'html-react-parser';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui';
@@ -11,7 +11,7 @@ import { CryptoState } from '../CryptoContext';
 
 const Coin = () => {
   const { id } = useParams();
-  const {currency, symbol, coin, setCoin, setLoading, loading} = CryptoState();
+  const {currency, symbol, coin, setCoin, setLoading} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
@@ -21,6 +21,7 @@ const Coin = () => {
 
   useEffect(() => {
     fetchCoin()
+    // eslint-disable-next-line
   }, [])
 
   const useStyles = makeStyles()((theme) => ({

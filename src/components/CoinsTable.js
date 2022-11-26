@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { CoinList } from '../config/api';
 import { CryptoState } from '../CryptoContext';
 import { makeStyles } from 'tss-react/mui';
 import { ThemeProvider, createTheme, Container, Typography, TextField, TableContainer, LinearProgress, Table, TableHead, TableRow, TableCell } from '@mui/material';

@@ -5,7 +5,8 @@ import Box from '@mui/material/Box';
 import Tab from '@mui/material/Tab';
 import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
-import { makeStyles } from 'tss-react/mui';
+import Login from './Login';
+import SignUp from './SignUp';
 
 
 
@@ -31,18 +32,6 @@ function ModalBox({ open, setOpen }) {
     setValue(newValue);
   };
   const handleClose = () => setOpen(false);
-  
-  
-  const useStyles = makeStyles()(() => ({
-    tabs: {
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "space-between",
-      width: "100%"
-    }
-  }));
-
-  const { classes } = useStyles();
   return (
   <Modal
       open={open}
@@ -58,8 +47,8 @@ function ModalBox({ open, setOpen }) {
         <Tab label="Sign up" value="2"/>
       </Tabs>
         </Box>
-        <TabPanel value="1">Item One</TabPanel>
-        <TabPanel value="2">Item Two</TabPanel>
+        <TabPanel value="1"><Login/></TabPanel>
+        <TabPanel value="2"><SignUp/></TabPanel>
       </TabContext>
       </Box>
   </Modal>

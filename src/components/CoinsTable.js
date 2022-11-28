@@ -10,7 +10,7 @@ function CoinsTable() {
   const [search, setSearch] = useState("")
   const [page, setPage] = useState(1);
   const { currency, symbol, fetchCoins, loading, coins } = CryptoState();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   console.log(page)
 

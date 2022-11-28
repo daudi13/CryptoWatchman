@@ -23,7 +23,7 @@ function SignUp() {
         type="password"
         label="Enter Password"
         value={password}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setPassword(e.target.value)}
         fullWidth
       />
       <TextField
@@ -31,7 +31,7 @@ function SignUp() {
         type="password"
         label="confirm password"
         value={confirmPassword}
-        onChange={(e) => setEmail(e.target.value)}
+        onChange={(e) => setConfirmPassword(e.target.value)}
         fullWidth
       />
       <Button

@@ -42,7 +42,7 @@ function ModalBox({ open, setOpen }) {
       <Box sx={style}>
       <TabContext value={value}>
         <Box sx={{ width: '100%', bgcolor: 'grey', borderRadius: 3 }}>
-            <Tabs value={value} onChange={handleChange} textColor="seco" centered>
+            <Tabs value={value} onChange={handleChange} textColor="secondary" indicatorColor='seconda' centered>
         <Tab label="Login" value="1" />
         <Tab label="Sign up" value="2"/>
       </Tabs>

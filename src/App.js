@@ -4,6 +4,7 @@ import Header from './components/Header';
 import Homepage from './Pages/Homepage';
 import Coin from './Pages/Coin';
 import { makeStyles } from 'tss-react/mui';
+import AlertBox from './components/Alert';
 
 function App() {
   const useStyles = makeStyles()(() => ({
@@ -20,6 +21,7 @@ function App() {
       <div className={classes.App}>
         <div>
           <Header />
+          <AlertBox/>
           <Routes>
             <Route path='/' element={<Homepage/>} exact />
             <Route path='/coin/:id' element={<Coin/>} />

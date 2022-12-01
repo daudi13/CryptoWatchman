@@ -48,7 +48,7 @@ function ModalBox({ open, setOpen }) {
       </Tabs>
         </Box>
         <TabPanel value="1"><Login/></TabPanel>
-        <TabPanel value="2"><SignUp/></TabPanel>
+          <TabPanel value="2"><SignUp handleClose={handleClose} /></TabPanel>
       </TabContext>
       </Box>
   </Modal>

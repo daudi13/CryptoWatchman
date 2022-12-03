@@ -5,6 +5,7 @@ import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 import { CryptoState } from '../CryptoContext';
 import ModalBox from './ModalBox';
+import UserSidebar from './UserSidebar';
 
 
 const Header = () => {
@@ -31,7 +32,7 @@ const Header = () => {
 
   const { classes } = useStyles();
   const navigate = useNavigate()
-  const { currency, setCurrency, setOpen, open } = CryptoState();
+  const { currency, setCurrency, setOpen, open, user } = CryptoState();
   const handleOpen = () => setOpen(true);
 
   return (
@@ -55,7 +56,10 @@ const Header = () => {
               <MenuItem value={'usd'}>USD</MenuItem>
               <MenuItem value={'aud'}>AUD</MenuItem>
               </Select>
-              <Button
+              {
+                user ? <UserSidebar/> :
+                  (
+                    <Button
                 variant='contained'
                 style={{
                   width: 85,
@@ -66,7 +70,9 @@ const Header = () => {
                 onClick={handleOpen}
               >
                 Login
-              </Button>
+                    </Button>
+                  )
+              }
             </div>
           </Toolbar>
         </Container>

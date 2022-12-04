@@ -7,7 +7,7 @@ import TabContext from '@mui/lab/TabContext';
 import TabPanel from '@mui/lab/TabPanel';
 import Login from './Login';
 import SignUp from './SignUp';
-
+import { makeStyles } from 'tss-react/mui';
 
 
 const style = {
@@ -31,7 +31,13 @@ function ModalBox({ open, setOpen }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  const useStyles = makeStyles()(() => ({
+
+  }))
   const handleClose = () => setOpen(false);
+  
+  const { classes } = useStyles();
   return (
   <Modal
       open={open}
@@ -49,6 +55,9 @@ function ModalBox({ open, setOpen }) {
         </Box>
           <TabPanel value="1"><Login handleClose={handleClose} /></TabPanel>
           <TabPanel value="2"><SignUp handleClose={handleClose} /></TabPanel>
+          <Box className={classes.google}>
+            <span>OR</span>
+          </Box>
       </TabContext>
       </Box>
   </Modal>

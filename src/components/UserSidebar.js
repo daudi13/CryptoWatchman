@@ -32,7 +32,9 @@ function  UserSidebar() {
       height: "100%",
       display: "flex",
       flexDirection: "column",
+      alignItems: "center",
       fontFamily: "monospace",
+      overflow: "hidden",
 
     },
     profile: {
@@ -49,11 +51,23 @@ function  UserSidebar() {
       cursor: "pointer",
       background: "#eebc1d",
       objectFit: "contain"
-    }
+    },
+    watchList: {
+      flex: 1,
+      width: "100%",
+      backgroundColor: "grey",
+      borderRadius: 10,
+      padding: 15,
+      paddingTop: 10,
+      display: "flex",
+      flexDirection: "column",
+      alignItems: "center",
+      gap: 12,
+      overflowY: "scroll",
+    },
   }))
 
   const { classes } = useStyles();
-
   const logout = () => {
 
   }
@@ -84,6 +98,9 @@ function  UserSidebar() {
           >
             {user.displayName || user.email}
           </span>
+        </div>
+        <div className={classes.watchList}>
+          <span style={{fontSize: 15, textShadow: "0 0 5px black"}}>watchList</span>
         </div>
         <Button
           onClick={logout}

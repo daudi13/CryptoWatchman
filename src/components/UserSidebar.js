@@ -4,6 +4,7 @@ import Box from '@mui/material/Box';
 import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
+import Button from '@mui/material/Button';
 
 
 function  UserSidebar() {
@@ -32,6 +33,7 @@ function  UserSidebar() {
       display: "flex",
       flexDirection: "column",
       fontFamily: "monospace",
+
     },
     profile: {
       flex: 1,
@@ -51,6 +53,10 @@ function  UserSidebar() {
   }))
 
   const { classes } = useStyles();
+
+  const logout = () => {
+
+  }
 
   const list = (anchor) => (
     <Box
@@ -79,6 +85,17 @@ function  UserSidebar() {
             {user.displayName || user.email}
           </span>
         </div>
+        <Button
+          onClick={logout}
+          variant="contained"
+          style={{
+            backgroundColor: "gold",
+            marginTop: "20px",
+            width: "100%",
+          }}
+        >
+        logout
+      </Button>
       </div>
     </Box>
   );

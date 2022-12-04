@@ -8,6 +8,8 @@ import TabPanel from '@mui/lab/TabPanel';
 import Login from './Login';
 import SignUp from './SignUp';
 import { makeStyles } from 'tss-react/mui';
+import GoogleButton from 'react-google-button';
+
 
 
 const style = {
@@ -31,12 +33,19 @@ function ModalBox({ open, setOpen }) {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  const useStyles = makeStyles()(() => ({
-
-  }))
   const handleClose = () => setOpen(false);
-  
+  const useStyles = makeStyles()(() => ({
+    google: {
+      display: "flex",
+      flexDirection: "column",
+      gap: 20,
+      alignItems: "center",
+      marginBottom: 30
+    }
+  }))
+
+
+
   const { classes } = useStyles();
   return (
   <Modal
@@ -57,6 +66,10 @@ function ModalBox({ open, setOpen }) {
           <TabPanel value="2"><SignUp handleClose={handleClose} /></TabPanel>
           <Box className={classes.google}>
             <span>OR</span>
+            <GoogleButton
+              label='sign in with Google'
+              style={{width: "80%"}}
+            />
           </Box>
       </TabContext>
       </Box>

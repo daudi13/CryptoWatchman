@@ -4,8 +4,6 @@ import React, { useState } from 'react';
 import { CryptoState } from '../CryptoContext';
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../firebase';
-import { makeStyles } from 'tss-react/mui';
-import GoogleButton from 'react-google-button';
 
 
 function SignUp({handleClose}) {
@@ -44,14 +42,6 @@ function SignUp({handleClose}) {
         handleClose();
     })
   };
-
-  const useStyles = makeStyles()(() => ({
-
-  }))
-
-
-  const { classes } = useStyles();
-
   return (
     <Box p={3} style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
       <TextField

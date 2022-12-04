@@ -4,8 +4,6 @@ import { Box } from '@mui/system';
 import { auth } from '../firebase';
 import { signInWithEmailAndPassword } from 'firebase/auth';
 import { CryptoState } from '../CryptoContext';
-import { makeStyles } from 'tss-react/mui';
-import GoogleButton from 'react-google-button';
 
 
 
@@ -36,12 +34,6 @@ function Login({handleClose}) {
     })
   };
 
-  const useStyles = makeStyles()(() => ({
-
-  }))
-
-
-  const { classes } = useStyles();
   return (
     <Box p={3} style={{ display: "flex", flexDirection: "column", gap: "20px", alignItems: "center" }}>
       <TextField

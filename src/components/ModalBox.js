@@ -9,7 +9,12 @@ import Login from './Login';
 import SignUp from './SignUp';
 import { makeStyles } from 'tss-react/mui';
 import GoogleButton from 'react-google-button';
+import { GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
+import { auth } from '../firebase';
+import { CryptoState } from '../CryptoContext';
 
+
+const provider = new GoogleAuthProvider();
 
 
 const style = {
@@ -29,6 +34,8 @@ const style = {
 
 function ModalBox({ open, setOpen }) {
   const [value, setValue] = React.useState('1');
+
+  const { setAlert } = CryptoState();
   
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -44,7 +51,26 @@ function ModalBox({ open, setOpen }) {
     }
   }))
 
-
+  const signInWithGoogle = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user
+        setAlert({
+          open: true,
+          message: `Sign in was successful. welcome ${user.name}`,
+          type: "success",
+        });
+        handleClose();
+      })
+      .catch((error) => {
+        setAlert({
+          open: true,
+          message: `${error.message}`,
+          type: "error"
+        });
+        handleClose();
+    })
+  }
 
   const { classes } = useStyles();
   return (
@@ -68,6 +94,7 @@ function ModalBox({ open, setOpen }) {
             <span>OR</span>
             <GoogleButton
               label='sign in with Google'
+              onClick={signInWithGoogle}
               style={{width: "80%"}}
             />
           </Box>

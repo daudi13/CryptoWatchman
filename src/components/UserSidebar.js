@@ -5,14 +5,16 @@ import SwipeableDrawer from '@mui/material/SwipeableDrawer';
 import { Avatar } from '@mui/material';
 import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
+import { signOut } from 'firebase/auth';
+import { auth } from '../firebase';
 
 
-function  UserSidebar() {
+function UserSidebar() {
   const [state, setState] = React.useState({
     right: false,
   });
 
-  const { user } = CryptoState();
+  const { user, setAlert } = CryptoState();
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -24,6 +26,16 @@ function  UserSidebar() {
 
     setState({ ...state, [anchor]: open });
   };
+
+    const logout = () => {
+    signOut(auth);
+      setAlert({
+        open: true,
+        message: "You've successfully logged out",
+        type: "success"
+      });
+      toggleDrawer();
+  }
 
   const useStyles = makeStyles()(() => ({
     container: {
@@ -68,9 +80,6 @@ function  UserSidebar() {
   }))
 
   const { classes } = useStyles();
-  const logout = () => {
-
-  }
 
   const list = (anchor) => (
     <Box

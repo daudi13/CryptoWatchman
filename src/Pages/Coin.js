@@ -83,6 +83,52 @@ const Coin = () => {
 
   console.log(coin)
 
+  const inWatchList = watchlist.includes(coin?.id);
+
+  const addToWatchList = async() => {
+    const coinRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist ? [...watchlist, coin?.id] : [coin?.id],
+      });
+      setAlert({
+        open: true,
+        message: `${coin.name} Added to the watchlist!`,
+        type: "success",
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      })
+    }
+  }
+
+  const removeFromWatchList = async () => {
+    const coinRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist.filter((watch) => watch !== coin?.id),
+      },
+      { merge: "true"}
+      );
+      setAlert({
+        open: true,
+        message: `${coin.name} removed from watchlist!`,
+        type: "success",
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      })
+    }
+  }
+
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }}/>
 
   return (

@@ -14,7 +14,10 @@ function UserSidebar() {
     right: false,
   });
 
-  const { user, setAlert } = CryptoState();
+  const { user, setAlert, watchlist, coins } = CryptoState();
+
+  console.log(watchlist);
+
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&
@@ -109,7 +112,18 @@ function UserSidebar() {
           </span>
         </div>
         <div className={classes.watchList}>
-          <span style={{fontSize: 15, textShadow: "0 0 5px black"}}>watchList</span>
+          <span style={{ fontSize: 15, textShadow: "0 0 5px black" }}>watchList</span>
+          {
+            coins?.map((coin) => {
+              if (watchlist?.includes(coin.id)) {
+                return (
+                  <div className={classes.coin}>
+                    <span>{coin.name}</span>
+                  </div>
+                )
+              }
+            })
+          }
         </div>
         <Button
           onClick={logout}

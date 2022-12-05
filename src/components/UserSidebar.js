@@ -7,7 +7,9 @@ import { makeStyles } from 'tss-react/mui';
 import Button from '@mui/material/Button';
 import { signOut } from 'firebase/auth';
 import { auth } from '../firebase';
-
+import{ FaTrash }from 'react-icons/fa'
+import { doc, setDoc } from 'firebase/firestore';
+import { db } from '../firebase';
 
 function UserSidebar() {
   const [state, setState] = React.useState({
@@ -80,9 +82,48 @@ function UserSidebar() {
       gap: 12,
       overflowY: "scroll",
     },
+    coin: {
+      display: "flex",
+      alignItems: "center",
+      justifyContent: "space-between",
+      padding: 10,
+      margin: 1,
+      backgroundColor: "gold",
+      color: 'black',
+      width: "100%",
+      borderRadius: 2,
+      gap: 2,
+      wordSpacing: 1
+    },
+    trash: {
+      cursor: "pointer"
+    }
   }))
 
   const { classes } = useStyles();
+
+    const removeFromWatchList = async (coinId) => {
+    const coinRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist.filter((watch) => watch !== coinId),
+      },
+      { merge: "true"}
+      );
+      setAlert({
+        open: true,
+        message: `removed from watchlist!`,
+        type: "success",
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      })
+    }
+  }
 
   const list = (anchor) => (
     <Box
@@ -115,13 +156,19 @@ function UserSidebar() {
           <span style={{ fontSize: 15, textShadow: "0 0 5px black" }}>watchList</span>
           {
             coins?.map((coin) => {
-              if (watchlist?.includes(coin.id)) {
-                return (
-                  <div className={classes.coin}>
-                    <span>{coin.name}</span>
-                  </div>
-                )
-              }
+              let profit = coin.price_change_percentage_24h >= 0;
+              return watchlist?.includes(coin.id) &&
+              <div className={classes.coin}>
+                <span>{coin.name}</span>
+                <span style={{
+                  display: "flex",
+                  gap: 8
+                  }}></span>
+                  <span style={{ color: profit ? "green" : "red" }}>{profit && '+'}{coin.price_change_percentage_24h?.toFixed(2)}%</span>
+                  <span className={classes.trash} onClick={() => removeFromWatchList(coin.id)}>
+                    <FaTrash style={{color: "red"}} />
+                  </span>
+              </div>
             })
           }
         </div>

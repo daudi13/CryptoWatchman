@@ -1,5 +1,6 @@
 import { Typography, LinearProgress, Button } from '@mui/material';
 import axios from 'axios';
+import { doc, setDoc } from 'firebase/firestore';
 import parse from 'html-react-parser';
 import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet';
@@ -8,6 +9,7 @@ import { makeStyles } from 'tss-react/mui';
 import CoinChart from '../components/CoinChart';
 import { SingleCoin } from '../config/api';
 import { CryptoState } from '../CryptoContext';
+import { db } from '../firebase';
 
 const Coin = () => {
   const { id } = useParams();

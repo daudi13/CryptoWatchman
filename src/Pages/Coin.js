@@ -13,13 +13,14 @@ import { db } from '../firebase';
 
 const Coin = () => {
   const { id } = useParams();
-  const {currency, symbol, coin, setCoin, setLoading, user} = CryptoState();
+  const {currency, symbol, coin, setCoin, setLoading, user, watchlist, setAlert} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
     setCoin(data);
     setLoading(false)
   }
+
 
   useEffect(() => {
     fetchCoin()
@@ -52,12 +53,13 @@ const Coin = () => {
     },
     info: {
       alignSelf: "start",
-      paddingLeft: 30,
-      paddingBottom: 30,
+      paddingLeft: 25,
+      paddingBottom: 10,
       width: "100%",
       [theme.breakpoints.down("md")]: {
         display: "flex",
-        justifyContent: "space-around"
+        flexDirection: "column",
+        alignItems: "center"
       }, 
       [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
@@ -78,6 +80,14 @@ const Coin = () => {
     },
     fig: {
       fontWeight: "lighter"
+    },
+    add: {
+      marginTop: 20,
+      width: "90%",
+      padding: 10,
+      [theme.breakpoints.down("md")]: {
+        width: "50%"
+      }
     }
   }))
 
@@ -164,7 +174,16 @@ const Coin = () => {
         {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
         </span></Typography>
           <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
-          {user && <Button variant='contained' style={{marginTop: 20, width: "90%", backgroundColor: "gold", padding: 10 }}>Add to wishList</Button>}
+          {user &&
+            <Button variant='contained'
+              onClick={inWatchList ? removeFromWatchList : addToWatchList}
+              className={classes.add}
+              style={{
+                backgroundColor: inWatchList && "#ff0000"
+              }}
+            >
+              {inWatchList ? "Remove from Watchlist" : `Add to wishList`}
+            </Button>}
       </div>
     </div>
     <CoinChart coin={coin} />

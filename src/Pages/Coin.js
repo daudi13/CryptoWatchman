@@ -1,4 +1,4 @@
-import { Typography, LinearProgress } from '@mui/material';
+import { Typography, LinearProgress, Button } from '@mui/material';
 import axios from 'axios';
 import parse from 'html-react-parser';
 import React, { useEffect } from 'react'
@@ -11,7 +11,7 @@ import { CryptoState } from '../CryptoContext';
 
 const Coin = () => {
   const { id } = useParams();
-  const {currency, symbol, coin, setCoin, setLoading} = CryptoState();
+  const {currency, symbol, coin, setCoin, setLoading, user} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
@@ -115,7 +115,8 @@ const Coin = () => {
         <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Current Price:<span className={classes.fig}> {symbol}
         {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
         </span></Typography>
-        <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
+          <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
+          {user && <Button variant='contained' style={{marginTop: 20}}>Add to wishList</Button>}
       </div>
     </div>
     <CoinChart coin={coin} />

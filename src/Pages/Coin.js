@@ -116,7 +116,7 @@ const Coin = () => {
         {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
         </span></Typography>
           <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
-          {user && <Button variant='contained' style={{marginTop: 20}}>Add to wishList</Button>}
+          {user && <Button variant='contained' style={{marginTop: 20, width: "90%", backgroundColor: "gold", padding: 10 }}>Add to wishList</Button>}
       </div>
     </div>
     <CoinChart coin={coin} />

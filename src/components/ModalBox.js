@@ -57,7 +57,7 @@ function ModalBox({ open, setOpen }) {
         const user = result.user
         setAlert({
           open: true,
-          message: `Sign in was successful. welcome ${user.name}`,
+          message: `Sign in was successful. welcome ${user.displayName || user.email}`,
           type: "success",
         });
         handleClose();

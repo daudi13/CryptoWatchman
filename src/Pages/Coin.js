@@ -1,19 +1,19 @@
-import { Typography, CircularProgress, LinearProgress } from '@mui/material';
+import { Typography, LinearProgress, Button } from '@mui/material';
 import axios from 'axios';
+import { doc, setDoc } from 'firebase/firestore';
 import parse from 'html-react-parser';
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { Helmet } from 'react-helmet';
 import { useParams } from 'react-router-dom'
 import { makeStyles } from 'tss-react/mui';
 import CoinChart from '../components/CoinChart';
 import { SingleCoin } from '../config/api';
 import { CryptoState } from '../CryptoContext';
+import { db } from '../firebase';
 
 const Coin = () => {
   const { id } = useParams();
-  const [coin, setCoin] = useState();
-  const [loading, setLoading] = useState(true);
-  const {currency, symbol} = CryptoState();
+  const {currency, symbol, coin, setCoin, setLoading, user, watchlist, setAlert} = CryptoState();
   
   const fetchCoin = async () => {
     const { data } = await axios.get(SingleCoin(id));
@@ -21,8 +21,10 @@ const Coin = () => {
     setLoading(false)
   }
 
+
   useEffect(() => {
     fetchCoin()
+    // eslint-disable-next-line
   }, [])
 
   const useStyles = makeStyles()((theme) => ({
@@ -51,12 +53,13 @@ const Coin = () => {
     },
     info: {
       alignSelf: "start",
-      paddingLeft: 30,
-      paddingBottom: 30,
+      paddingLeft: 25,
+      paddingBottom: 10,
       width: "100%",
       [theme.breakpoints.down("md")]: {
         display: "flex",
-        justifyContent: "space-around"
+        flexDirection: "column",
+        alignItems: "center"
       }, 
       [theme.breakpoints.down("sm")]: {
         flexDirection: "column",
@@ -77,6 +80,14 @@ const Coin = () => {
     },
     fig: {
       fontWeight: "lighter"
+    },
+    add: {
+      marginTop: 20,
+      width: "90%",
+      padding: 10,
+      [theme.breakpoints.down("md")]: {
+        width: "50%"
+      }
     }
   }))
 
@@ -84,13 +95,59 @@ const Coin = () => {
 
   console.log(coin)
 
+  const inWatchList = watchlist.includes(coin?.id);
+
+  const addToWatchList = async() => {
+    const coinRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist ? [...watchlist, coin?.id] : [coin?.id],
+      });
+      setAlert({
+        open: true,
+        message: `${coin.name} Added to the watchlist!`,
+        type: "success",
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      })
+    }
+  }
+
+  const removeFromWatchList = async () => {
+    const coinRef = doc(db, "watchlist", user.uid);
+
+    try {
+      await setDoc(coinRef, {
+        coins: watchlist.filter((watch) => watch !== coin?.id),
+      },
+      { merge: "true"}
+      );
+      setAlert({
+        open: true,
+        message: `${coin.name} removed from watchlist!`,
+        type: "success",
+      })
+    } catch (error) {
+      setAlert({
+        open: true,
+        message: error.message,
+        type: "error",
+      })
+    }
+  }
+
   if (!coin) return <LinearProgress style={{ backgroundColor: "gold" }}/>
 
   return (
     <div className={classes.container}>
       <Helmet>
         <meta charSet='utf-8' />
-        <title>CryptoWatchMan | {id}</title>
+        <title>🪙CryptoWatchMan | {id}</title>
       </Helmet>
     <div className={classes.sidebar}>
       <img
@@ -116,7 +173,17 @@ const Coin = () => {
         <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Current Price:<span className={classes.fig}> {symbol}
         {coin?.market_data.current_price[currency.toLowerCase()].toFixed(2)}
         </span></Typography>
-        <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
+          <Typography variant="h5" style={{ marginBottom: "7px", AlignItems: "start" }} className={classes.heading}>Market cap:<span className={classes.fig}> {(coin?.market_data.market_cap[currency.toLowerCase()].toString().slice(0, -6))}M</span></Typography>
+          {user &&
+            <Button variant='contained'
+              onClick={inWatchList ? removeFromWatchList : addToWatchList}
+              className={classes.add}
+              style={{
+                backgroundColor: inWatchList && "#ff0000"
+              }}
+            >
+              {inWatchList ? "Remove from Watchlist" : `Add to wishList`}
+            </Button>}
       </div>
     </div>
     <CoinChart coin={coin} />

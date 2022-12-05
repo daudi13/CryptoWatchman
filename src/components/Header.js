@@ -1,9 +1,12 @@
-import { AppBar, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider } from '@mui/material'
+import { AppBar, Toolbar, Typography, Select, MenuItem, createTheme, ThemeProvider, Button } from '@mui/material'
 import { Container } from '@mui/system'
 import React from 'react'
 import { useNavigate } from 'react-router-dom';
 import { makeStyles } from 'tss-react/mui';
 import { CryptoState } from '../CryptoContext';
+import ModalBox from './ModalBox';
+import UserSidebar from './UserSidebar';
+
 
 const Header = () => {
   const useStyles = makeStyles()(() => ({
@@ -13,7 +16,12 @@ const Header = () => {
       fontFamily: "Montserrat",
       fontWeight: "bold",
       cursor: "pointer",
-    }
+    },
+    right: {
+      display: "flex",
+      alignContent: "center",
+      gap : 10
+    },
   }))
 
   const darkTheme = createTheme({
@@ -24,7 +32,8 @@ const Header = () => {
 
   const { classes } = useStyles();
   const navigate = useNavigate()
-  const { currency, setCurrency } = CryptoState();
+  const { currency, setCurrency, setOpen, open, user } = CryptoState();
+  const handleOpen = () => setOpen(true);
 
   return (
     <ThemeProvider theme={darkTheme}>
@@ -32,6 +41,7 @@ const Header = () => {
         <Container>
           <Toolbar>
             <Typography className={classes.title} onClick={() => navigate("/")}>Crypto Watchman</Typography>
+            <div className={classes.right}>
             <Select variant='outlined' style={
               {
                 width: 100,
@@ -45,10 +55,29 @@ const Header = () => {
             >
               <MenuItem value={'usd'}>USD</MenuItem>
               <MenuItem value={'aud'}>AUD</MenuItem>
-            </Select>
+              </Select>
+              {
+                user ? <UserSidebar/> :
+                  (
+                    <Button
+                variant='contained'
+                style={{
+                  width: 85,
+                  height: 40,
+                  marginLeft: 15,
+                  backgroundColor: "#EEBC1D",
+                }}
+                onClick={handleOpen}
+              >
+                Login
+                    </Button>
+                  )
+              }
+            </div>
           </Toolbar>
         </Container>
       </AppBar>
+      <ModalBox open={open} setOpen={setOpen} />
     </ThemeProvider>
   )
 }

@@ -12,7 +12,7 @@ function App() {
       backgroundColor: "#14161a",
       color: "white",
       minHeight: "100vh",
-      marginTop: 60
+      marginTop: 57
     }
   }))
 

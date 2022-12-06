@@ -9,7 +9,7 @@ import UserSidebar from './UserSidebar';
 
 
 const Header = () => {
-  const useStyles = makeStyles()(() => ({
+  const useStyles = makeStyles()((theme) => ({
     title: {
       flex: 1,
       color: "gold",
@@ -37,9 +37,9 @@ const Header = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar  position='fixed'>
+      <AppBar  position='fixed' className={classes.top}>
         <Container>
-          <Toolbar>
+          <Toolbar className={classes.toolbar}>
             <Typography className={classes.title} onClick={() => navigate("/")}>Crypto Watchman</Typography>
             <div className={classes.right}>
             <Select variant='outlined' style={

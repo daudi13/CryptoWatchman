@@ -12,7 +12,6 @@ function CoinsTable() {
   const { currency, symbol, fetchCoins, loading, coins } = CryptoState();
   const navigate = useNavigate();
 
-  console.log(page)
 
   useEffect(() => {
     fetchCoins();

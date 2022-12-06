@@ -16,7 +16,6 @@ export const getCoinsItems = createAsyncThunk(
       const resp = await axios(url);
       return resp.data;
     } catch (error) {
-      console.log(error)
     }
   }
 );
@@ -37,7 +36,5 @@ const coinSlice = createSlice({
     },
   }
 })
-
-console.log(coinSlice);
 
 export default coinSlice.reducer

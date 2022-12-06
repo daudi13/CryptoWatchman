@@ -41,8 +41,6 @@ const CoinChart = ({coin}) => {
     setHistoricalData(data.prices)
   }
 
-  console.log(historicalData)
-
   useEffect(() => {
     fetchHistoricalData();
       // eslint-disable-next-line

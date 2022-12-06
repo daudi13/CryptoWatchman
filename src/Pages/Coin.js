@@ -91,9 +91,7 @@ const Coin = () => {
     }
   }))
 
-  const { classes } = useStyles();
-
-  console.log(coin)
+  const { classes } = useStyles()
 
   const inWatchList = watchlist.includes(coin?.id);
 

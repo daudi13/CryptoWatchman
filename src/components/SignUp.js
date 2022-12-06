@@ -25,7 +25,6 @@ function SignUp({handleClose}) {
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
       const user = userCredential.user
-      console.log(user);
       setAlert({
         open: true,
         message: `Sign up successful. welcone ${user.email}`,

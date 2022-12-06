@@ -18,8 +18,6 @@ function UserSidebar() {
 
   const { user, setAlert, watchlist, coins } = CryptoState();
 
-  console.log(watchlist);
-
   const toggleDrawer = (anchor, open) => (event) => {
     if (
       event &&

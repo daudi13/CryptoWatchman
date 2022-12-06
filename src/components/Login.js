@@ -16,7 +16,6 @@ function Login({handleClose}) {
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user
-        console.log(user);
         setAlert({
           open: true,
           message: "You've successfully logged in",

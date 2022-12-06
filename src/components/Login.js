@@ -18,7 +18,7 @@ function Login({handleClose}) {
         const user = userCredential.user
         setAlert({
           open: true,
-          message: "You've successfully logged in",
+          message: `You've successfully logged in ${user.email}`,
           type: "success"
         })
         handleClose();

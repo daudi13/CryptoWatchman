@@ -111,7 +111,7 @@ function UserSidebar() {
       );
       setAlert({
         open: true,
-        message: `removed from watchlist!`,
+        message: `${coinId} was successfully removed from watchlist!`,
         type: "success",
       })
     } catch (error) {

@@ -38,9 +38,6 @@ const CryptoContext = ({ children }) => {
         if (coin.exists()) {
           setwatchlist(coin.data().coins);
         }
-        else {
-          watchlist
-        }
       });
       return () => {
         unsubscribe();

@@ -37,7 +37,7 @@ const Header = () => {
 
   return (
     <ThemeProvider theme={darkTheme}>
-      <AppBar color='transparent' position='static'>
+      <AppBar  position='fixed'>
         <Container>
           <Toolbar>
             <Typography className={classes.title} onClick={() => navigate("/")}>Crypto Watchman</Typography>

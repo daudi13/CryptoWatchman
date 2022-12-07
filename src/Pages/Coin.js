@@ -10,6 +10,7 @@ import CoinChart from '../components/CoinChart';
 import { SingleCoin } from '../config/api';
 import { CryptoState } from '../CryptoContext';
 import { db } from '../firebase';
+import ReadMoreReact from 'read-more-react';
 
 const Coin = () => {
   const { id } = useParams();
@@ -21,6 +22,7 @@ const Coin = () => {
     setLoading(false)
   }
 
+  const desc = parse(`${coin?.description.en}`)
 
   useEffect(() => {
     fetchCoin()
@@ -163,8 +165,10 @@ const Coin = () => {
       <Typography
         variant='subtitle1'
         className={classes.description}
-      >
-        { parse(`${coin?.description.en}`)}
+        >
+          {
+            desc
+          }
       </Typography>
       <div className={classes.info}>
         <Typography variant="h5" style={{marginBottom: "7px", AlignItems: "start"}} className={classes.heading}>Rank: <span className={classes.fig}>{coin?.coingecko_rank}</span></Typography>
